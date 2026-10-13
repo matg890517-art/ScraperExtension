@@ -3,6 +3,43 @@ import reactLogo from '@/assets/react.svg';
 import wxtLogo from '/wxt.svg';
 import './App.css';
 
+import { runScript } from './automation/engine';
+import type { Script } from './automation/types';
+import { Button } from '@mui/material';
+
+const testScript: Script = [
+  {
+    type: 'waitFor',
+    text: 'Login',
+  },
+  {
+    type: 'click',
+    text: 'Login',
+  },
+  {
+    type: 'waitFor',
+    text: 'Username',
+    timeout: 1000,
+  },
+  {
+    type: 'click',
+    text: 'Username',
+  },
+];
+
+async function runAutomation() {
+  const [tab] = await chrome.tabs.query({
+    active: true,
+    currentWindow: true,
+  });
+
+  if (!tab.id) {
+    throw new Error('No active tab');
+  }
+
+  await runScript(tab.id, testScript);
+}
+
 function App() {
   const [count, setCount] = useState(0);
 
@@ -18,9 +55,15 @@ function App() {
       </div>
       <h1>WXT + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={runAutomation}>
           count is {count}
         </button>
+        <Button
+          variant="contained"
+          onClick={runAutomation}
+        >
+          Run
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
