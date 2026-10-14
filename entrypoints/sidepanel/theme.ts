@@ -97,7 +97,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Nunito Sans", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: '"Nunito Sans", Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
@@ -114,9 +114,25 @@ const theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: {
-        html: { minWidth: 320 },
-        body: { margin: 0, minWidth: 320, minHeight: '100vh' },
+        html: {
+          minWidth: 320,
+          colorScheme: 'dark',
+          fontSynthesis: 'none',
+          textRendering: 'optimizeLegibility',
+          WebkitFontSmoothing: 'antialiased',
+          MozOsxFontSmoothing: 'grayscale',
+        },
+        body: {
+          margin: 0,
+          minWidth: 320,
+          minHeight: '100vh',
+        },
+        '#root': {
+          width: '100%',
+          minHeight: '100vh',
+        },
         '*': { boxSizing: 'border-box' },
+        button: { fontFamily: 'inherit' },
       },
     },
     MuiButton: {
