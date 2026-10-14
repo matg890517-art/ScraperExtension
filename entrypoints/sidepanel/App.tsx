@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import {
   Box,
@@ -38,61 +37,46 @@ function App() {
 
   async function handleRun() {
     if (running) return;
-
     setRunning(true);
     setStatus('Running');
     setError('');
 
     try {
-      const [tab] = await chrome.tabs.query({
-        active: true,
-        currentWindow: true,
-      });
-
-      if (tab.id == null) {
-        throw new Error('No active browser tab found.');
-      }
-
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      if (tab.id == null) throw new Error('No active browser tab found.');
       await runScript(tab.id, testScript);
       setStatus('Completed');
     } catch (err) {
       setStatus('Failed');
-      setError(
-        err instanceof Error ? err.message : 'Automation failed.',
-      );
+      setError(err instanceof Error ? err.message : 'Automation failed.');
     } finally {
       setRunning(false);
     }
   }
 
   return (
-    <Box className="automation-app">
+    <Box className="automation-app" sx={{ bgcolor: 'background.default', color: 'text.primary' }}>
       <Box className="app-header">
-        <Box className="brand-icon">
+        <Box
+          className="brand-icon"
+          sx={{
+            color: 'primary.contrastText',
+            background: (theme) =>
+              `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
+          }}
+        >
           <AutoAwesomeRoundedIcon />
         </Box>
-
         <Box flex={1}>
-          <Typography variant="h6" className="brand-title">
-            Automate
-          </Typography>
+          <Typography variant="h6" className="brand-title">Automate</Typography>
           <Typography variant="caption" color="text.secondary">
             Browser automation workspace
           </Typography>
         </Box>
-
         <Chip
           size="small"
           label={status}
-          color={
-            status === 'Completed'
-              ? 'success'
-              : status === 'Failed'
-                ? 'error'
-                : running
-                  ? 'info'
-                  : 'default'
-          }
+          color={status === 'Completed' ? 'success' : status === 'Failed' ? 'error' : running ? 'info' : 'default'}
           variant="outlined"
         />
       </Box>
@@ -101,79 +85,70 @@ function App() {
 
       <Box className="editor-content">
         <Box mb={2}>
-          <Typography variant="subtitle1" fontWeight={700}>
-            Automation script
-          </Typography>
+          <Typography variant="subtitle1" fontWeight={700}>Automation script</Typography>
           <Typography variant="body2" color="text.secondary">
             Define actions to automate the current browser tab.
           </Typography>
         </Box>
 
-        <Paper variant="outlined" className="script-panel">
+        <Paper
+          variant="outlined"
+          className="script-panel"
+          sx={{ bgcolor: 'background.paper', borderColor: 'divider' }}
+        >
           <Box className="script-panel-header">
-            <Typography variant="body2" fontWeight={600}>
-              Steps
-            </Typography>
+            <Typography variant="body2" fontWeight={600}>Steps</Typography>
             <Chip size="small" label={`${testScript.length} actions`} />
           </Box>
-
           <Stack spacing={1.25}>
             {testScript.map((action, index) => (
-              <Box className="action-row" key={`${action.type}-${index}`}>
-                <Box className="action-number">{index + 1}</Box>
-
+              <Box
+                className="action-row"
+                key={`${action.type}-${index}`}
+                sx={{ bgcolor: 'background.default', borderColor: 'divider' }}
+              >
+                <Box
+                  className="action-number"
+                  sx={{ color: 'primary.lighter', bgcolor: 'primary.darker' }}
+                >
+                  {index + 1}
+                </Box>
                 <Box flex={1} minWidth={0}>
                   <Typography variant="body2" fontWeight={600}>
                     {actionDescriptions[action.type] ?? action.type}
                   </Typography>
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    className="action-target"
-                  >
+                  <Typography variant="caption" color="text.secondary" className="action-target">
                     {'text' in action ? action.text : 'No target specified'}
                   </Typography>
                 </Box>
-
-                <Chip
-                  size="small"
-                  variant="outlined"
-                  label={action.type}
-                />
+                <Chip size="small" variant="outlined" label={action.type} />
               </Box>
             ))}
           </Stack>
         </Paper>
 
         {error && (
-          <Paper variant="outlined" className="error-panel">
-            <Typography variant="body2" color="error">
-              {error}
-            </Typography>
+          <Paper
+            variant="outlined"
+            className="error-panel"
+            sx={{ bgcolor: 'rgba(255, 86, 48, 0.08)', borderColor: 'error.dark' }}
+          >
+            <Typography variant="body2" color="error.light">{error}</Typography>
           </Paper>
         )}
 
         <Box mt={2}>
-          <Typography variant="caption" color="text.secondary">
-            Script editor
-          </Typography>
+          <Typography variant="caption" color="text.secondary">Script editor</Typography>
           <Typography variant="body2">
             Editing and adding steps will be enabled in the next step.
           </Typography>
         </Box>
       </Box>
 
-      <Box className="app-footer">
-        <Button
-          fullWidth
-          variant="contained"
-          startIcon={<PlayArrowRoundedIcon />}
-          onClick={handleRun}
-          disabled={running}
-        >
+      <Box className="app-footer" sx={{ bgcolor: 'background.paper', borderColor: 'divider' }}>
+        <Button fullWidth variant="contained" startIcon={<PlayArrowRoundedIcon />} onClick={handleRun} disabled={running}>
           {running ? 'Running…' : 'Run automation'}
         </Button>
-
         <Button
           fullWidth
           variant="outlined"
