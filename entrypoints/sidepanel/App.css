@@ -1,42 +1,102 @@
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  min-height: 100vh;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #54bc4ae0);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.automation-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: #e8eaf0;
+  background: #11141b;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 16px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #7565f7, #4b8bff);
 }
 
-.card {
-  padding: 2em;
+.brand-title {
+  font-weight: 700 !important;
+  letter-spacing: -0.4px !important;
 }
 
-.read-the-docs {
-  color: #888;
+.editor-content {
+  flex: 1;
+  padding: 20px 16px;
+}
+
+.script-panel {
+  padding: 14px;
+  color: inherit !important;
+  background: #181c26 !important;
+  border-color: #303644 !important;
+  border-radius: 12px !important;
+}
+
+.script-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.action-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 10px;
+  border: 1px solid #303644;
+  border-radius: 9px;
+  background: #202532;
+}
+
+.action-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  color: #c8c1ff;
+  background: #39345e;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.action-target {
+  display: block;
+  overflow-wrap: anywhere;
+  margin-top: 3px;
+}
+
+.error-panel {
+  margin-top: 16px;
+  padding: 12px;
+  border-color: #7f353d !important;
+  background: #301c23 !important;
+}
+
+.app-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-top: 1px solid #303644;
+  background: #151922;
 }
