@@ -51,6 +51,11 @@ export default function ScriptStepItem({
         >
           {'text' in action ? action.text : 'No target specified'}
         </Typography>
+        {action.type === 'waitFor' && (
+          <Typography variant="caption" color="text.secondary">
+            Timeout: {action.timeout ?? 10000} ms
+          </Typography>
+        )}
       </Stack>
       <Chip size="small" variant="outlined" label={action.type} />
     </Stack>
