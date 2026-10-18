@@ -54,22 +54,19 @@ function App() {
   }
 
   return (
-    <Box
+    <Stack
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
         minHeight: '100vh',
         bgcolor: 'background.default',
         color: 'text.primary',
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, p: 2 }}>
-        <Box
+      <Stack direction="row" alignItems="center" spacing={1.5} sx={{ p: 2 }}>
+        <Stack
+          alignItems="center"
+          justifyContent="center"
+          flexShrink={0}
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
             width: 42,
             height: 42,
             borderRadius: 1.5,
@@ -79,61 +76,54 @@ function App() {
           }}
         >
           <AutoAwesomeRoundedIcon />
-        </Box>
-        <Box sx={{ flex: 1, minWidth: 0 }}>
+        </Stack>
+        <Stack sx={{ flex: 1, minWidth: 0 }} spacing={0}>
           <Typography variant="h6" sx={{ letterSpacing: '-0.025em' }}>
             Automate
           </Typography>
           <Typography variant="caption" color="text.secondary">
             Browser automation workspace
           </Typography>
-        </Box>
+        </Stack>
         <Chip
           size="small"
           label={status}
           color={status === 'Completed' ? 'success' : status === 'Failed' ? 'error' : running ? 'info' : 'default'}
           variant="outlined"
         />
-      </Box>
+      </Stack>
 
       <Divider />
 
-      <Box sx={{ flex: 1, p: 2.5 }}>
-        <Box sx={{ mb: 2 }}>
+      <Stack sx={{ flex: 1, p: 2.5 }} spacing={2}>
+        <Stack spacing={0}>
           <Typography variant="subtitle1" fontWeight={700}>
             Automation script
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Define actions to automate the current browser tab.
           </Typography>
-        </Box>
+        </Stack>
 
         <Paper
           variant="outlined"
           sx={{ p: 1.75, borderRadius: 1.5, bgcolor: 'background.paper', borderColor: 'divider' }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              mb: 2,
-            }}
-          >
+          <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
             <Typography variant="body2" fontWeight={600}>
               Steps
             </Typography>
             <Chip size="small" label={`${testScript.length} actions`} />
-          </Box>
+          </Stack>
 
           <Stack spacing={1.25}>
             {testScript.map((action, index) => (
-              <Box
+              <Stack
                 key={`${action.type}-${index}`}
+                direction="row"
+                alignItems="center"
+                spacing={1.25}
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 1.25,
                   p: 1.5,
                   border: 1,
                   borderColor: 'divider',
@@ -141,12 +131,11 @@ function App() {
                   bgcolor: 'background.default',
                 }}
               >
-                <Box
+                <Stack
+                  alignItems="center"
+                  justifyContent="center"
+                  flexShrink={0}
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
                     width: 28,
                     height: 28,
                     borderRadius: 1,
@@ -157,8 +146,8 @@ function App() {
                   }}
                 >
                   {index + 1}
-                </Box>
-                <Box sx={{ flex: 1, minWidth: 0 }}>
+                </Stack>
+                <Stack sx={{ flex: 1, minWidth: 0 }} spacing={0}>
                   <Typography variant="body2" fontWeight={600}>
                     {actionDescriptions[action.type] ?? action.type}
                   </Typography>
@@ -169,9 +158,9 @@ function App() {
                   >
                     {'text' in action ? action.text : 'No target specified'}
                   </Typography>
-                </Box>
+                </Stack>
                 <Chip size="small" variant="outlined" label={action.type} />
-              </Box>
+              </Stack>
             ))}
           </Stack>
         </Paper>
@@ -180,7 +169,6 @@ function App() {
           <Paper
             variant="outlined"
             sx={{
-              mt: 2,
               p: 1.5,
               bgcolor: 'rgba(255, 86, 48, 0.08)',
               borderColor: 'error.dark',
@@ -192,21 +180,19 @@ function App() {
           </Paper>
         )}
 
-        <Box sx={{ mt: 2 }}>
+        <Stack spacing={0}>
           <Typography variant="caption" color="text.secondary">
             Script editor
           </Typography>
           <Typography variant="body2">
             Editing and adding steps will be enabled in the next step.
           </Typography>
-        </Box>
-      </Box>
+        </Stack>
+      </Stack>
 
-      <Box
+      <Stack
+        spacing={1.25}
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 1.25,
           p: 2,
           borderTop: 1,
           borderColor: 'divider',
@@ -232,8 +218,8 @@ function App() {
         >
           Stop
         </Button>
-      </Box>
-    </Box>
+      </Stack>
+    </Stack>
   );
 }
 
