@@ -63,10 +63,11 @@ function App() {
     >
       <Stack direction="row" alignItems="center" spacing={1.5} sx={{ p: 2 }}>
         <Stack
-          alignItems="center"
-          justifyContent="center"
-          flexShrink={0}
           sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
             width: 42,
             height: 42,
             borderRadius: 1.5,
@@ -97,7 +98,7 @@ function App() {
 
       <Stack sx={{ flex: 1, p: 2.5 }} spacing={2}>
         <Stack spacing={0}>
-          <Typography variant="subtitle1" fontWeight={700}>
+          <Typography variant="h6">
             Automation script
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -110,7 +111,7 @@ function App() {
           sx={{ p: 1.75, borderRadius: 1.5, bgcolor: 'background.paper', borderColor: 'divider' }}
         >
           <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
-            <Typography variant="body2" fontWeight={600}>
+            <Typography variant="subtitle2">
               Steps
             </Typography>
             <Chip size="small" label={`${testScript.length} actions`} />
@@ -132,10 +133,11 @@ function App() {
                 }}
               >
                 <Stack
-                  alignItems="center"
-                  justifyContent="center"
-                  flexShrink={0}
                   sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
                     width: 28,
                     height: 28,
                     borderRadius: 1,
@@ -148,7 +150,7 @@ function App() {
                   {index + 1}
                 </Stack>
                 <Stack sx={{ flex: 1, minWidth: 0 }} spacing={0}>
-                  <Typography variant="body2" fontWeight={600}>
+                  <Typography variant="subtitle2">
                     {actionDescriptions[action.type] ?? action.type}
                   </Typography>
                   <Typography
