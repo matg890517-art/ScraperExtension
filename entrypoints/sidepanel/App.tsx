@@ -12,6 +12,8 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import StopRoundedIcon from '@mui/icons-material/StopRounded';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 
+import ScriptChip from './components/ScriptChip';
+
 import { runScript } from './automation/engine';
 import type { Script } from './automation/types';
 
@@ -161,7 +163,7 @@ function App() {
                     {'text' in action ? action.text : 'No target specified'}
                   </Typography>
                 </Stack>
-                <Chip size="small" variant="outlined" label={action.type} />
+                <ScriptChip type={action.type} />
               </Stack>
             ))}
           </Stack>
