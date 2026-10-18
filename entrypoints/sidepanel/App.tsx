@@ -61,7 +61,7 @@ function App() {
         color: 'text.primary',
       }}
     >
-      <Stack direction="row" alignItems="center" spacing={1.5} sx={{ p: 2 }}>
+      <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', p: 2 }}>
         <Stack
           sx={{
             display: 'flex',
@@ -110,7 +110,7 @@ function App() {
           variant="outlined"
           sx={{ p: 1.75, borderRadius: 1.5, bgcolor: 'background.paper', borderColor: 'divider' }}
         >
-          <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
+          <Stack direction="row" sx={{ alignItems: "center", justifyContent: "space-between", mb: 2 }}>
             <Typography variant="subtitle2">
               Steps
             </Typography>
@@ -122,9 +122,9 @@ function App() {
               <Stack
                 key={`${action.type}-${index}`}
                 direction="row"
-                alignItems="center"
                 spacing={1.25}
                 sx={{
+                  alignItems: "center",
                   p: 1.5,
                   border: 1,
                   borderColor: 'divider',
