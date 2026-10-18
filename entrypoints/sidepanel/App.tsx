@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-  Box,
   Button,
   Chip,
   Divider,
@@ -12,7 +11,7 @@ import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import StopRoundedIcon from '@mui/icons-material/StopRounded';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 
-import ScriptChip from './components/ScriptChip';
+import ScriptStepItem from './components/ScriptStepItem';
 
 import { runScript } from './automation/engine';
 import type { Script } from './automation/types';
@@ -121,55 +120,12 @@ function App() {
 
           <Stack spacing={1.25}>
             {testScript.map((action, index) => (
-              <Stack
+              <ScriptStepItem
                 key={`${action.type}-${index}`}
-                direction="row"
-                spacing={1.25}
-                sx={{
-                  alignItems: "center",
-                  p: 1.5,
-                  border: 1,
-                  borderColor: 'divider',
-                  borderRadius: 1.125,
-                  bgcolor: 'background.default',
-                }}
-              >
-                <Stack
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    width: 28,
-                    height: 28,
-                    borderRadius: 1,
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: 'primary.lighter',
-                    bgcolor: 'primary.darker',
-                  }}
-                >
-                  {index + 1}
-                </Stack>
-                <Stack sx={{ flex: 1, minWidth: 0 }} spacing={0}>
-                  <Typography variant="subtitle2">
-                    {actionDescriptions[action.type] ?? action.type}
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    color="text.secondary"
-                    sx={{ display: 'block', overflowWrap: 'anywhere', mt: 0.375 }}
-                  >
-                    {'text' in action ? action.text : 'No target specified'}
-                  </Typography>
-                  {action.type === 'waitFor' && (
-                    <Typography variant="caption" color="text.secondary">
-                      Timeout: {action.timeout ?? 10000} ms
-                    </Typography>
-                  )}
-                </Stack>
-                <ScriptChip type={action.type} />
-              </Stack>
+                action={action}
+                index={index}
+                description={actionDescriptions[action.type] ?? action.type}
+              />
             ))}
           </Stack>
         </Paper>
